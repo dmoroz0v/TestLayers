@@ -1,5 +1,4 @@
 import Foundation
-import NotesDomainModel
 
 struct NoteDTO: Codable {
     var id: String

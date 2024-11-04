@@ -1,9 +1,7 @@
 import Foundation
-import NotesDomainModel
 
-public class NotesFetchClient {
-    public init() {}
-    public func fetch(completion: @escaping ([Note]) -> Void) {
+class NotesFetchClient {
+    func fetch(completion: @escaping ([Note]) -> Void) {
         // условно ходим в ручку GET https://example.com/notes
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             let s = UserDefaults.standard.string(forKey: "notes") ?? "[]"

@@ -1,6 +1,4 @@
 import Foundation
-import NotesDomainModel
-import NotesDomainData
 
 public protocol NotesProviderObserver: AnyObject {
     func providerDidUpdate(_: NotesProvider)

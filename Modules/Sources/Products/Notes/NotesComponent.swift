@@ -1,6 +1,6 @@
 import Foundation
 import NeedleFoundation
-import NotesDomainCore
+import NotesCore
 import NotesListDI
 import NoteEditDI
 

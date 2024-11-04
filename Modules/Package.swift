@@ -19,35 +19,19 @@ let package = Package(
     ],
     targets: [
 
-        // Notes Domain
+        // Notes Core
         .target(
-            name: "NotesDomainModel",
+            name: "NotesCore",
             dependencies: [
             ],
-            path: "Sources/Notes/Domain/Model"
-        ),
-        .target(
-            name: "NotesDomainData",
-            dependencies: [
-                "NotesDomainModel",
-            ],
-            path: "Sources/Notes/Domain/Data"
-        ),
-        .target(
-            name: "NotesDomainCore",
-            dependencies: [
-                "NotesDomainData",
-                "NotesDomainModel",
-            ],
-            path: "Sources/Notes/Domain/Core"
+            path: "Sources/Notes/Core"
         ),
 
         // NotesList Component
         .target(
             name: "NotesListApplication",
             dependencies: [
-                "NotesDomainModel",
-                "NotesDomainCore",
+                "NotesCore",
             ],
             path: "Sources/Notes/Components/NotesList/Application"
         ),
@@ -62,9 +46,7 @@ let package = Package(
             name: "NotesListDI",
             dependencies: [
                 "NotesListApplication",
-                "NotesListUI",
-                "NotesDomainModel",
-                "NotesDomainCore",
+                "NotesCore",
                 .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Notes/Components/NotesList/DI"
@@ -74,8 +56,7 @@ let package = Package(
         .target(
             name: "NoteEditApplication",
             dependencies: [
-                "NotesDomainModel",
-                "NotesDomainCore",
+                "NotesCore",
             ],
             path: "Sources/Notes/Components/NoteEdit/Application"
         ),
@@ -90,9 +71,7 @@ let package = Package(
             name: "NoteEditDI",
             dependencies: [
                 "NoteEditApplication",
-                "NoteEditUI",
-                "NotesDomainModel",
-                "NotesDomainCore",
+                "NotesCore",
                 .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Notes/Components/NoteEdit/DI"
@@ -102,8 +81,9 @@ let package = Package(
         .target(
             name: "NotesProduct",
             dependencies: [
-                "NotesDomainModel",
-                "NotesDomainCore",
+                "NotesCore",
+                "NotesListUI",
+                "NotesListApplication",
                 "NotesListDI",
                 "NoteEditDI",
                 .product(name: "NeedleFoundation", package: "Needle"),

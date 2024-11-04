@@ -1,6 +1,5 @@
 import Foundation
-import NotesDomainModel
-import NotesListUI
+import NotesCore
 import NotesListApplication
 
 public class NotesListAssembly {
@@ -11,13 +10,8 @@ public class NotesListAssembly {
         self.componentProvider = componentProvider
     }
 
-    public func assemble(
-        delegate: NotesListViewModelDelegate
-    ) -> NotesListView {
+    public func assemble() -> NotesListViewModel {
         let component = componentProvider()
-        let viewModel = NotesListViewModel(notesProvider: component.notesProvider)
-        viewModel.delegate = delegate
-        let view = NotesListView(viewModel: viewModel)
-        return view
+        return NotesListViewModel(notesProvider: component.notesProvider)
     }
 }

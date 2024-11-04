@@ -1,13 +1,12 @@
 import Foundation
-import NotesDomainModel
 
-public class NoteSaveClient {
+class NoteSaveClient {
 
     private enum Constants {
         static let notesKey = "notes"
     }
 
-    public init() {
+    init() {
         if UserDefaults.standard.string(forKey: Constants.notesKey) == nil {
             let dto: [NoteDTO] = [
                 .init(id: UUID().uuidString, title: "Купить продукты", text: "1. молоко\n2. селедка"),
@@ -20,7 +19,7 @@ public class NoteSaveClient {
         }
     }
 
-    public func save(note: Note, completion: @escaping () -> Void) {
+    func save(note: Note, completion: @escaping () -> Void) {
         // условно ходим в ручку POST https://example.com/note
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 

@@ -3,7 +3,7 @@
 import Foundation
 import NeedleFoundation
 import NoteEditDI
-import NotesDomainCore
+import NotesCore
 import NotesListDI
 
 // swiftlint:disable unused_declaration

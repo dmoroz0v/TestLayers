@@ -1,7 +1,8 @@
 import UIKit
 import NotesProduct
 import NotesListApplication
-import NotesDomainModel
+import NotesListUI
+import NotesCore
 import SwiftUI
 
 private class NotesDependenciesImpl: NotesDependencies {
@@ -27,10 +28,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         notesProductComponent = NotesComponent(dependencies: NotesDependenciesImpl())
 
-        let nodesListView = notesProductComponent.notesListAssembly.assemble(delegate: self)
+        let notesListViewModel = notesProductComponent.notesListAssembly.assemble()
+        notesListViewModel.delegate = self
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UIHostingController(rootView: nodesListView)
+        window?.rootViewController = UIHostingController(
+            rootView: NotesListView(viewModel: notesListViewModel)
+        )
         window?.makeKeyAndVisible()
     }
 
@@ -67,7 +71,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate: NotesListViewModelDelegate {
 
-    func notesListViewModel(_: NotesListApplication.NotesListViewModel, didSelectNote note: NotesDomainModel.Note) {
+    func notesListViewModel(_: NotesListApplication.NotesListViewModel, didSelectNote note: NotesCore.Note) {
         print("tap on", note.title)
     }
 

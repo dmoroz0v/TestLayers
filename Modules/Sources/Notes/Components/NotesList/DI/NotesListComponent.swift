@@ -1,5 +1,5 @@
 import NeedleFoundation
-import NotesDomainCore
+import NotesCore
 
 public protocol NotesListDependency: Dependency {
     var notesProvider: NotesProvider { get }

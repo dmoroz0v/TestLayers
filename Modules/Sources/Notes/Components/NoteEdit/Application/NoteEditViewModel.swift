@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
-import NotesDomainModel
-import NotesDomainCore
+import NotesCore
 
 public class NoteEditViewModel: ObservableObject {
 

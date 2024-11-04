@@ -1,6 +1,5 @@
 import Foundation
-import NotesDomainModel
-import NoteEditUI
+import NotesCore
 import NoteEditApplication
 
 public class NoteEditAssembly {
@@ -11,10 +10,8 @@ public class NoteEditAssembly {
         self.componentProvider = componentProvider
     }
 
-    public func assemble(note: Note) -> NoteEditView {
+    public func assemble(note: Note) -> NoteEditViewModel {
         let component = componentProvider()
-        let viewModel = NoteEditViewModel(note: note, notesProvider: component.notesProvider)
-        let view = NoteEditView(viewModel: viewModel)
-        return view
+        return NoteEditViewModel(note: note, notesProvider: component.notesProvider)
     }
 }

@@ -1,6 +1,5 @@
 import Foundation
-import NotesDomainModel
-import NotesDomainCore
+import NotesCore
 
 public protocol NotesListViewModelDelegate: AnyObject {
     func notesListViewModel(_: NotesListViewModel, didSelectNote: Note)
