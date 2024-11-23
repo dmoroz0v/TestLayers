@@ -2,6 +2,9 @@ import Foundation
 import SwiftUI
 import NotesCore
 
+public protocol NoteEditViewModelDelegate: AnyObject {
+}
+
 public class NoteEditViewModel: ObservableObject {
 
     public struct ViewState {
@@ -14,6 +17,8 @@ public class NoteEditViewModel: ObservableObject {
             notesProvider.save(note: note)
         }
     }
+
+    public weak var delegate: NoteEditViewModelDelegate?
 
     @Published public private(set) var state: ViewState!
 

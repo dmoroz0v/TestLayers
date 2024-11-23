@@ -2,9 +2,11 @@
 
 import Foundation
 import NeedleFoundation
-import NoteEditDI
+import NoteEditApplication
+import NoteEditScene
 import NotesCore
-import NotesListDI
+import NotesListApplication
+import NotesListScene
 
 // swiftlint:disable unused_declaration
 private let needleDependenciesHash : String? = nil
@@ -19,7 +21,7 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
-private class NotesListDependency2ac0ecde6263307d829eProvider: NotesListDependency {
+private class NotesListDependencyecb0d872d282a504a53aProvider: NotesListDependency {
     var notesProvider: NotesProvider {
         return notesComponent.notesProvider
     }
@@ -28,11 +30,11 @@ private class NotesListDependency2ac0ecde6263307d829eProvider: NotesListDependen
         self.notesComponent = notesComponent
     }
 }
-/// ^->NotesComponent->NotesListComponent
-private func factorybd6204e5520a4840886162654e1cb4236443be67(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return NotesListDependency2ac0ecde6263307d829eProvider(notesComponent: parent1(component) as! NotesComponent)
+/// ^->NotesComponent->NotesListDepComponent
+private func factory61585c1626df66ba32d262654e1cb4236443be67(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return NotesListDependencyecb0d872d282a504a53aProvider(notesComponent: parent1(component) as! NotesComponent)
 }
-private class NoteEditDependency054c984a1b3f758e8b3bProvider: NoteEditDependency {
+private class NoteEditDependency36675e35eb09466167a6Provider: NoteEditDependency {
     var notesProvider: NotesProvider {
         return notesComponent.notesProvider
     }
@@ -41,26 +43,26 @@ private class NoteEditDependency054c984a1b3f758e8b3bProvider: NoteEditDependency
         self.notesComponent = notesComponent
     }
 }
-/// ^->NotesComponent->NoteEditComponent
-private func factoryc7fd598a8e0da481c3a562654e1cb4236443be67(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return NoteEditDependency054c984a1b3f758e8b3bProvider(notesComponent: parent1(component) as! NotesComponent)
+/// ^->NotesComponent->NoteEditDepComponent
+private func factory33f34f6b0c35f1d4590962654e1cb4236443be67(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return NoteEditDependency36675e35eb09466167a6Provider(notesComponent: parent1(component) as! NotesComponent)
 }
 
 #else
 extension NotesComponent: Registration {
     public func registerItems() {
 
-        localTable["notesListAssembly-NotesListAssembly"] = { [unowned self] in self.notesListAssembly as Any }
-        localTable["noteEditAssembly-NoteEditAssembly"] = { [unowned self] in self.noteEditAssembly as Any }
+        localTable["notesListSceneAssembly-NotesListSceneAssembly"] = { [unowned self] in self.notesListSceneAssembly as Any }
+        localTable["noteEditSceneAssembly-NoteEditSceneAssembly"] = { [unowned self] in self.noteEditSceneAssembly as Any }
         localTable["notesProvider-NotesProvider"] = { [unowned self] in self.notesProvider as Any }
     }
 }
-extension NotesListComponent: Registration {
+extension NotesListDepComponent: Registration {
     public func registerItems() {
         keyPathToName[\NotesListDependency.notesProvider] = "notesProvider-NotesProvider"
     }
 }
-extension NoteEditComponent: Registration {
+extension NoteEditDepComponent: Registration {
     public func registerItems() {
         keyPathToName[\NoteEditDependency.notesProvider] = "notesProvider-NotesProvider"
     }
@@ -82,8 +84,8 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 @inline(never) private func register1() {
     registerProviderFactory("^->NotesComponent", factoryEmptyDependencyProvider)
-    registerProviderFactory("^->NotesComponent->NotesListComponent", factorybd6204e5520a4840886162654e1cb4236443be67)
-    registerProviderFactory("^->NotesComponent->NoteEditComponent", factoryc7fd598a8e0da481c3a562654e1cb4236443be67)
+    registerProviderFactory("^->NotesComponent->NotesListDepComponent", factory61585c1626df66ba32d262654e1cb4236443be67)
+    registerProviderFactory("^->NotesComponent->NoteEditDepComponent", factory33f34f6b0c35f1d4590962654e1cb4236443be67)
 }
 #endif
 

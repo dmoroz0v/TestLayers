@@ -5,5 +5,5 @@ public protocol NoteEditDependency: Dependency {
     var notesProvider: NotesProvider { get }
 }
 
-public class NoteEditComponent: Component<NoteEditDependency> {
+public class NoteEditDIComponent: Component<NoteEditDependency> {
 }

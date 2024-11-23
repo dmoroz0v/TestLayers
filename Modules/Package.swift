@@ -32,6 +32,7 @@ let package = Package(
             name: "NotesListApplication",
             dependencies: [
                 "NotesCore",
+                .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Notes/Components/NotesList/Application"
         ),
@@ -43,13 +44,13 @@ let package = Package(
             path: "Sources/Notes/Components/NotesList/UI"
         ),
         .target(
-            name: "NotesListDI",
+            name: "NotesListScene",
             dependencies: [
                 "NotesListApplication",
-                "NotesCore",
-                .product(name: "NeedleFoundation", package: "Needle"),
+                "NotesListUI",
+                "NotesCore"
             ],
-            path: "Sources/Notes/Components/NotesList/DI"
+            path: "Sources/Notes/Components/NotesList/Scene"
         ),
 
         // NoteEdit Component
@@ -57,6 +58,7 @@ let package = Package(
             name: "NoteEditApplication",
             dependencies: [
                 "NotesCore",
+                .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Notes/Components/NoteEdit/Application"
         ),
@@ -68,13 +70,13 @@ let package = Package(
             path: "Sources/Notes/Components/NoteEdit/UI"
         ),
         .target(
-            name: "NoteEditDI",
+            name: "NoteEditScene",
             dependencies: [
                 "NoteEditApplication",
+                "NoteEditUI",
                 "NotesCore",
-                .product(name: "NeedleFoundation", package: "Needle"),
             ],
-            path: "Sources/Notes/Components/NoteEdit/DI"
+            path: "Sources/Notes/Components/NoteEdit/Scene"
         ),
 
         // Notes Product
@@ -84,8 +86,8 @@ let package = Package(
                 "NotesCore",
                 "NotesListUI",
                 "NotesListApplication",
-                "NotesListDI",
-                "NoteEditDI",
+                "NotesListScene",
+                "NoteEditScene",
                 .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Products/Notes"

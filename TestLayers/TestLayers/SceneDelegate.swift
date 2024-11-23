@@ -12,7 +12,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private var notesProductComponent: NotesComponent!
+    private lazy var notesProductComponent: NotesComponent = {
+        NotesProduct.registerProviderFactories()
+        return NotesComponent(dependencies: NotesDependenciesImpl())
+    }()
 
     func scene(
         _ scene: UIScene,
@@ -24,17 +27,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        NotesProduct.registerProviderFactories()
-
-        notesProductComponent = NotesComponent(dependencies: NotesDependenciesImpl())
-
-        let notesListViewModel = notesProductComponent.notesListAssembly.assemble()
-        notesListViewModel.delegate = self
+        let notesListView = notesProductComponent.notesListSceneAssembly.assemble(delegate: self)
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UIHostingController(
-            rootView: NotesListView(viewModel: notesListViewModel)
-        )
+        window?.rootViewController = UIHostingController(rootView: notesListView)
         window?.makeKeyAndVisible()
     }
 
