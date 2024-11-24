@@ -5,5 +5,5 @@ public protocol NotesListDependency: Dependency {
     var notesProvider: NotesProvider { get }
 }
 
-public class NotesListDIComponent: Component<NotesListDependency> {
+public class NotesListComponent: Component<NotesListDependency> {
 }

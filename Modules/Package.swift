@@ -27,56 +27,56 @@ let package = Package(
             path: "Sources/Notes/Core"
         ),
 
-        // NotesList Component
+        // NotesList Scene
         .target(
             name: "NotesListApplication",
             dependencies: [
                 "NotesCore",
-                .product(name: "NeedleFoundation", package: "Needle"),
             ],
-            path: "Sources/Notes/Components/NotesList/Application"
+            path: "Sources/Notes/Scenes/NotesList/Application"
         ),
         .target(
             name: "NotesListUI",
             dependencies: [
                 "NotesListApplication",
             ],
-            path: "Sources/Notes/Components/NotesList/UI"
+            path: "Sources/Notes/Scenes/NotesList/UI"
         ),
         .target(
-            name: "NotesListScene",
+            name: "NotesListAssembly",
             dependencies: [
                 "NotesListApplication",
                 "NotesListUI",
-                "NotesCore"
+                "NotesCore",
+                .product(name: "NeedleFoundation", package: "Needle"),
             ],
-            path: "Sources/Notes/Components/NotesList/Scene"
+            path: "Sources/Notes/Scenes/NotesList/Assembly"
         ),
 
-        // NoteEdit Component
+        // NoteEdit Scene
         .target(
             name: "NoteEditApplication",
             dependencies: [
                 "NotesCore",
-                .product(name: "NeedleFoundation", package: "Needle"),
             ],
-            path: "Sources/Notes/Components/NoteEdit/Application"
+            path: "Sources/Notes/Scenes/NoteEdit/Application"
         ),
         .target(
             name: "NoteEditUI",
             dependencies: [
                 "NoteEditApplication",
             ],
-            path: "Sources/Notes/Components/NoteEdit/UI"
+            path: "Sources/Notes/Scenes/NoteEdit/UI"
         ),
         .target(
-            name: "NoteEditScene",
+            name: "NoteEditAssembly",
             dependencies: [
                 "NoteEditApplication",
                 "NoteEditUI",
                 "NotesCore",
+                .product(name: "NeedleFoundation", package: "Needle"),
             ],
-            path: "Sources/Notes/Components/NoteEdit/Scene"
+            path: "Sources/Notes/Scenes/NoteEdit/Assembly"
         ),
 
         // Notes Product
@@ -84,10 +84,12 @@ let package = Package(
             name: "NotesProduct",
             dependencies: [
                 "NotesCore",
-                "NotesListUI",
                 "NotesListApplication",
-                "NotesListScene",
-                "NoteEditScene",
+                "NotesListUI",
+                "NotesListAssembly",
+                "NoteEditApplication",
+                "NoteEditUI",
+                "NoteEditAssembly",
                 .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Products/Notes"

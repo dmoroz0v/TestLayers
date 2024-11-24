@@ -2,9 +2,9 @@ import Foundation
 import NeedleFoundation
 import NotesCore
 import NotesListApplication
-import NotesListScene
+import NotesListAssembly
 import NoteEditApplication
-import NoteEditScene
+import NoteEditAssembly
 
 public protocol NotesDependencies {
 }
@@ -17,12 +17,12 @@ public class NotesComponent: BootstrapComponent {
         self.dependencies = dependencies
     }
 
-    public var notesListSceneAssembly: NotesListSceneAssembly {
-        NotesListSceneAssembly(diComponentProvider: NotesListDIComponent(parent: self))
+    public var notesListAssembly: NotesListAssembly {
+        NotesListAssembly(сomponentProvider: NotesListComponent(parent: self))
     }
 
-    public var noteEditSceneAssembly: NoteEditSceneAssembly {
-        NoteEditSceneAssembly(diComponentProvider: NoteEditDIComponent(parent: self))
+    public var noteEditAssembly: NoteEditAssembly {
+        NoteEditAssembly(сomponentProvider: NoteEditComponent(parent: self))
     }
 
     public var notesProvider: NotesProvider { shared { NotesProvider() } }
