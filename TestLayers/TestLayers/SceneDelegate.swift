@@ -1,8 +1,10 @@
 import UIKit
 import NotesProduct
+import NotesCore
 import NotesListApplication
 import NotesListUI
-import NotesCore
+import NoteEditApplication
+import NoteEditUI
 import SwiftUI
 
 private class NotesDependenciesImpl: NotesDependencies {
@@ -12,10 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private lazy var notesProductComponent: NotesComponent = {
+    lazy var notesProductComponent: NotesBootstrapComponent = {
         NotesProduct.registerProviderFactories()
-        return NotesComponent(dependencies: NotesDependenciesImpl())
+        return NotesBootstrapComponent(dependencies: NotesDependenciesImpl())
     }()
+    
+    var navigationController: UINavigationController!
 
     func scene(
         _ scene: UIScene,
@@ -29,8 +33,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let notesListView = notesProductComponent.notesListAssembly.assemble(delegate: self)
 
+        navigationController = UINavigationController(
+            rootViewController: UIHostingController(rootView: notesListView)
+        )
+
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UIHostingController(rootView: notesListView)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
@@ -68,7 +76,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: NotesListViewModelDelegate {
 
     func notesListViewModel(_: NotesListApplication.NotesListViewModel, didSelectNote note: NotesCore.Note) {
-        print("tap on", note.title)
+        let noteEditView = notesProductComponent.noteEditAssembly.assemble(note: note, delegate: self)
+        navigationController.pushViewController(
+            UIHostingController(rootView: noteEditView),
+            animated: true
+        )
     }
+
+}
+
+extension SceneDelegate: NoteEditViewModelDelegate {
 
 }

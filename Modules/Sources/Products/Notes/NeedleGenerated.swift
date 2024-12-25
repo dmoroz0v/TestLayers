@@ -23,35 +23,35 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
-private class NotesListDependency2ac0ecde6263307d829eProvider: NotesListDependency {
+private class NotesListDependencyc80f763c1a0c643ee717Provider: NotesListDependency {
     var notesProvider: NotesProvider {
-        return notesComponent.notesProvider
+        return notesBootstrapComponent.notesProvider
     }
-    private let notesComponent: NotesComponent
-    init(notesComponent: NotesComponent) {
-        self.notesComponent = notesComponent
+    private let notesBootstrapComponent: NotesBootstrapComponent
+    init(notesBootstrapComponent: NotesBootstrapComponent) {
+        self.notesBootstrapComponent = notesBootstrapComponent
     }
 }
-/// ^->NotesComponent->NotesListComponent
-private func factorybd6204e5520a4840886162654e1cb4236443be67(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return NotesListDependency2ac0ecde6263307d829eProvider(notesComponent: parent1(component) as! NotesComponent)
+/// ^->NotesBootstrapComponent->NotesListComponent
+private func factoryb965523897956df7b395f9d7cf758ea41e150465(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return NotesListDependencyc80f763c1a0c643ee717Provider(notesBootstrapComponent: parent1(component) as! NotesBootstrapComponent)
 }
-private class NoteEditDependency054c984a1b3f758e8b3bProvider: NoteEditDependency {
+private class NoteEditDependency522f2f4a8a43357f9072Provider: NoteEditDependency {
     var notesProvider: NotesProvider {
-        return notesComponent.notesProvider
+        return notesBootstrapComponent.notesProvider
     }
-    private let notesComponent: NotesComponent
-    init(notesComponent: NotesComponent) {
-        self.notesComponent = notesComponent
+    private let notesBootstrapComponent: NotesBootstrapComponent
+    init(notesBootstrapComponent: NotesBootstrapComponent) {
+        self.notesBootstrapComponent = notesBootstrapComponent
     }
 }
-/// ^->NotesComponent->NoteEditComponent
-private func factoryc7fd598a8e0da481c3a562654e1cb4236443be67(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return NoteEditDependency054c984a1b3f758e8b3bProvider(notesComponent: parent1(component) as! NotesComponent)
+/// ^->NotesBootstrapComponent->NoteEditComponent
+private func factory8566686b2cfba3594b72f9d7cf758ea41e150465(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return NoteEditDependency522f2f4a8a43357f9072Provider(notesBootstrapComponent: parent1(component) as! NotesBootstrapComponent)
 }
 
 #else
-extension NotesComponent: Registration {
+extension NotesBootstrapComponent: Registration {
     public func registerItems() {
 
         localTable["notesListAssembly-NotesListAssembly"] = { [unowned self] in self.notesListAssembly as Any }
@@ -85,9 +85,9 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 #if !NEEDLE_DYNAMIC
 
 @inline(never) private func register1() {
-    registerProviderFactory("^->NotesComponent", factoryEmptyDependencyProvider)
-    registerProviderFactory("^->NotesComponent->NotesListComponent", factorybd6204e5520a4840886162654e1cb4236443be67)
-    registerProviderFactory("^->NotesComponent->NoteEditComponent", factoryc7fd598a8e0da481c3a562654e1cb4236443be67)
+    registerProviderFactory("^->NotesBootstrapComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->NotesBootstrapComponent->NotesListComponent", factoryb965523897956df7b395f9d7cf758ea41e150465)
+    registerProviderFactory("^->NotesBootstrapComponent->NoteEditComponent", factory8566686b2cfba3594b72f9d7cf758ea41e150465)
 }
 #endif
 

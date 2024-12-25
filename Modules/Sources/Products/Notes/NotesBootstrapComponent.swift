@@ -9,7 +9,7 @@ import NoteEditAssembly
 public protocol NotesDependencies {
 }
 
-public class NotesComponent: BootstrapComponent {
+public class NotesBootstrapComponent: BootstrapComponent {
 
     private let dependencies: NotesDependencies
 
