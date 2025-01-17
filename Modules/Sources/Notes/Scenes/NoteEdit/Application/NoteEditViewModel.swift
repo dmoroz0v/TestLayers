@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
-import NotesCore
+import NotesCoreDomain
+import NotesModel
 
 public protocol NoteEditViewModelDelegate: AnyObject {
 }

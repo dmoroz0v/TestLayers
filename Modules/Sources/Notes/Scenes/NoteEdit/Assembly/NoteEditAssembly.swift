@@ -1,7 +1,8 @@
 import Foundation
-import NotesCore
+import NotesCoreDomain
 import NoteEditApplication
 import NoteEditUI
+import NotesModel
 
 public class NoteEditAssembly {
 

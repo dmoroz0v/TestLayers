@@ -1,4 +1,6 @@
 import Foundation
+import NotesModel
+import NotesCoreDTO
 
 class NoteDTOToDomainConverter {
     func notes(from dto: [NoteDTO]) -> [Note] {

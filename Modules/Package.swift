@@ -19,25 +19,52 @@ let package = Package(
     ],
     targets: [
 
-        // Notes Core
+        // Notes Model
         .target(
-            name: "NotesCore",
+            name: "NotesModel",
             dependencies: [
             ],
-            path: "Sources/Notes/Core"
+            path: "Sources/Notes/Model"
+        ),
+
+        // Notes Core
+        .target(
+            name: "NotesCoreDTO",
+            dependencies: [
+            ],
+            path: "Sources/Notes/Core/DTO"
+        ),
+        .target(
+            name: "NotesCoreServiceAccess",
+            dependencies: [
+                "NotesCoreDTO",
+                "NotesModel",
+            ],
+            path: "Sources/Notes/Core/ServiceAccess"
+        ),
+
+        .target(
+            name: "NotesCoreDomain",
+            dependencies: [
+                "NotesCoreServiceAccess",
+                "NotesModel",
+            ],
+            path: "Sources/Notes/Core/Domain"
         ),
 
         // NotesList Scene
         .target(
             name: "NotesListApplication",
             dependencies: [
-                "NotesCore",
+                "NotesCoreDomain",
+                "NotesModel",
             ],
             path: "Sources/Notes/Scenes/NotesList/Application"
         ),
         .target(
             name: "NotesListUI",
             dependencies: [
+                "NotesModel",
                 "NotesListApplication",
             ],
             path: "Sources/Notes/Scenes/NotesList/UI"
@@ -47,7 +74,8 @@ let package = Package(
             dependencies: [
                 "NotesListApplication",
                 "NotesListUI",
-                "NotesCore",
+                "NotesCoreDomain",
+                "NotesModel",
                 .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Notes/Scenes/NotesList/Assembly"
@@ -57,23 +85,28 @@ let package = Package(
         .target(
             name: "NoteEditApplication",
             dependencies: [
-                "NotesCore",
+                "NotesCoreDomain",
+                "NotesModel",
             ],
             path: "Sources/Notes/Scenes/NoteEdit/Application"
         ),
         .target(
             name: "NoteEditUI",
             dependencies: [
+                "NotesModel",
                 "NoteEditApplication",
             ],
             path: "Sources/Notes/Scenes/NoteEdit/UI"
         ),
+        // application переименовать, COre разбить (DTO, ServiceAccess, Domain(Provider)) еще и сделать что-тотипа Note/Foundation
+        // правила зависимостей чтобы не было ui -> DTO
         .target(
             name: "NoteEditAssembly",
             dependencies: [
                 "NoteEditApplication",
                 "NoteEditUI",
-                "NotesCore",
+                "NotesCoreDomain",
+                "NotesModel",
                 .product(name: "NeedleFoundation", package: "Needle"),
             ],
             path: "Sources/Notes/Scenes/NoteEdit/Assembly"
@@ -83,7 +116,8 @@ let package = Package(
         .target(
             name: "NotesProduct",
             dependencies: [
-                "NotesCore",
+                "NotesModel",
+                "NotesCoreDomain",
                 "NotesListApplication",
                 "NotesListUI",
                 "NotesListAssembly",

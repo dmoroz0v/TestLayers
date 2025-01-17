@@ -1,5 +1,5 @@
 import Foundation
-import NotesCore
+import NotesCoreDomain
 import NotesListApplication
 import NotesListUI
 

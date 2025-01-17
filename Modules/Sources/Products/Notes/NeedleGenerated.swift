@@ -4,11 +4,9 @@ import Foundation
 import NeedleFoundation
 import NoteEditApplication
 import NoteEditAssembly
-import NoteEditScene
-import NotesCore
+import NotesCoreDomain
 import NotesListApplication
 import NotesListAssembly
-import NotesListScene
 
 // swiftlint:disable unused_declaration
 private let needleDependenciesHash : String? = nil

@@ -1,6 +1,6 @@
 import UIKit
 import NotesProduct
-import NotesCore
+import NotesModel
 import NotesListApplication
 import NotesListUI
 import NoteEditApplication
@@ -75,7 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate: NotesListViewModelDelegate {
 
-    func notesListViewModel(_: NotesListApplication.NotesListViewModel, didSelectNote note: NotesCore.Note) {
+    func notesListViewModel(_: NotesListApplication.NotesListViewModel, didSelectNote note: NotesModel.Note) {
         let noteEditView = notesProductComponent.noteEditAssembly.assemble(note: note, delegate: self)
         navigationController.pushViewController(
             UIHostingController(rootView: noteEditView),

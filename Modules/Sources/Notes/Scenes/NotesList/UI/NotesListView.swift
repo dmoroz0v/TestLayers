@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import NotesListApplication
+import NotesModel
 
 public struct NotesListView: View {
 
