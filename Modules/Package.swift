@@ -98,8 +98,6 @@ let package = Package(
             ],
             path: "Sources/Notes/Scenes/NoteEdit/UI"
         ),
-        // application переименовать, COre разбить (DTO, ServiceAccess, Domain(Provider)) еще и сделать что-тотипа Note/Foundation
-        // правила зависимостей чтобы не было ui -> DTO
         .target(
             name: "NoteEditAssembly",
             dependencies: [
