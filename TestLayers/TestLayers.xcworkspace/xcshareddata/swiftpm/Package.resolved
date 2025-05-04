@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/uber/needle",
       "state" : {
-        "revision" : "6db73ae873952794b94fd6bb5111554e23c160af",
-        "version" : "0.24.0"
+        "revision" : "69f7a889d2736f2621c6083ac29e0a75d158f249",
+        "version" : "0.25.1"
       }
     }
   ],

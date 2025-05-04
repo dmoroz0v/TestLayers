@@ -10,12 +10,16 @@ let package = Package(
         .iOS(.v15),
     ],
     products: [
-        .library(name: "Notes", targets: [
-            "NotesProduct"
-        ])
+        .library(
+            name: "Notes",
+            type: .static,
+            targets: [
+                "NotesProduct"
+            ]
+        )
     ],
     dependencies: [
-        .package(url: "https://github.com/uber/needle", exact: "0.24.0"),
+        .package(url: "https://github.com/uber/needle", exact: "0.25.1"),
     ],
     targets: [
 
